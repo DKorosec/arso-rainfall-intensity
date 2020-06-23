@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+        "target": "ES2015",
+        "module": "commonjs",
+        "typeRoots": [
+            "./node_modules/@types"
+        ],
+        
+        "declaration": true,
+        "declarationMap": true,
+        "allowJs": true,
+        "checkJs": true,
+        "sourceMap": true,
+        "outDir": "built",
+        "rootDir": "src",
+        "removeComments": true,
+        "strict": true,
+        "noImplicitAny": true,
+        "alwaysStrict": true,
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true,
+        "strictPropertyInitialization": true,
+        "esModuleInterop": true
+    },
+    "exclude": [
+        "built",
+        "node_modules",
+        "./*.js"
+    ]
+}
