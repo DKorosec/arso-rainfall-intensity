@@ -1,9 +1,11 @@
 # arso-rainfall-intensity
 
-Documentation by example.
+* This project is written in *typescript 3.9*, but you can use its transpiled javascript built which targets *ES2015*. 
+* Built includes typings and declaration map (for debugging), so if your IDE is good enough you'll get module type hints working with JS.
 
-* The project is written and requires *typescript 3.9*, to use in javascript type "npm run build" and access via /built folder.
-* The built includes typing, so if your IDE is good enough you'll get module type hints.
+----
+
+Documentation by example:
 
 ```javascript
     const fs = require('fs');
