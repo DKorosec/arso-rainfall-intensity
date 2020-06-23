@@ -1,9 +1,10 @@
 {
     "name": "arso-rainfall-intensity",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "!!!Only for slovenia!!! Provides simple api for fetching radar images of rainfall intensity and parsing from pixels and converting pixel coordinates to pairs of latitude and longitude or vice versa.",
     "main": "built/index.js",
     "types": "built/index.d.ts",
+    "keywords": ["arso", "rainfall", "intensity", "parser"],
     "repository": {
         "type": "git",
         "url": "git@github.com:DKorosec/arso-rainfall-intensity.git"
