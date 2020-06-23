@@ -2,7 +2,7 @@
 
 Documentation by example.
 
-* The project is written in typescript, to use in javascript type "npm run build" and access via /built folder.
+* The project is written and requires *typescript 3.9*, to use in javascript type "npm run build" and access via /built folder.
 * The built includes typing, so if your IDE is good enough you'll get module type hints.
 
 ```javascript
