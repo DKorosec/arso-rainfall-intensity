@@ -31,10 +31,8 @@ export default class RadarImageProjection {
         this.image = PNG.sync.read(buffer, { checkCRC: false });
     }
 
-    getImageBuffer(): Buffer | null {
-        if (!this.image) {
-            return null;
-        }
+    getImageBuffer(): Buffer {
+        assertNotNull(this.image, 'Image not loaded.');
         return PNG.sync.write(this.image);
     }
 
