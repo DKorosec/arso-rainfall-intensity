@@ -30,7 +30,7 @@ const radarColorsInfoMap: Map<string, IPixelRadarResult> = new Map(radarColorsIn
 
 export default class ArsoProjection extends RadarImageProjection {
     public readonly interestPixelBounds: IBBox;
-    protected imagePixelRadarMap: (IPixelRadarResult)[][] | null;
+    private _imagePixelRadarMap: (IPixelRadarResult)[][] | null;
 
     constructor() {
         const degreeProj = 'EPSG:900913';
@@ -54,7 +54,7 @@ export default class ArsoProjection extends RadarImageProjection {
             y1: 12, y2: 585
         };
 
-        this.imagePixelRadarMap = null;
+        this._imagePixelRadarMap = null;
     }
 
     loadImageFromBuffer(buffer: Buffer): void {
@@ -68,11 +68,11 @@ export default class ArsoProjection extends RadarImageProjection {
     }
 
     getPixelRadarValue({ x, y }: IPoint): IPixelRadarResult {
-        assertNotNull(this.imagePixelRadarMap, 'Image not loaded.');
-        return this.imagePixelRadarMap[y][x];
+        assertNotNull(this._imagePixelRadarMap, 'Image not loaded.');
+        return this._imagePixelRadarMap[y][x];
     }
 
-    _mapPixelLocationToRadarValue({ x, y }: IPoint): IPixelRadarResult {
+    private _mapPixelLocationToRadarValue({ x, y }: IPoint): IPixelRadarResult {
         const { r, g, b, a } = this.getPixelInfo({ x, y });
         if (a !== 255) {
             return noReadingPixelResult;
@@ -84,13 +84,13 @@ export default class ArsoProjection extends RadarImageProjection {
         return colorResult;
     }
 
-    _preprocessLoadedImage(): void {
+    private _preprocessLoadedImage(): void {
         assertNotNull(this.image, 'Image not loaded.');
         const { width, height, data } = this.image;
         // Remove pixels that are outside area of interest or
         // if they contain unknown values.
         // Then create map that maps pixel to radar read value
-        this.imagePixelRadarMap = new Array(width).fill(null)
+        this._imagePixelRadarMap = new Array(width).fill(null)
             .map(() => new Array(height).fill(null));
         for (let y = 0; y < height; y++) {
             for (let x = 0; x < width; x++) {
@@ -99,7 +99,7 @@ export default class ArsoProjection extends RadarImageProjection {
                 const pixelOutOfBounds = !this.isPixelInInterestBounds({ x, y });
                 const pixelUnknownValue = !pixelValue;
                 const isIrrelevant = pixelOutOfBounds || pixelUnknownValue;
-                this.imagePixelRadarMap[y][x] = pixelValue;
+                this._imagePixelRadarMap[y][x] = pixelValue;
                 if (isIrrelevant) {
                     data[idx] = 0;
                     data[idx + 1] = 0;
