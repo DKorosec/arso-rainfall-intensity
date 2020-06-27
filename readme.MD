@@ -50,16 +50,16 @@ Documentation by example:
     // Given lng lat, returns meter position
     projection.projectDegrees2MeterUnits({ x: LNG_VALUE, y: LAT_VALUE });
 
-    // give pixel location, returns the lng lat postion
+    // Given pixel location, returns the lng lat postion
     projection.projectImagePixelToDegreeUnit({ x: 69, y: 69 });
 
-    // give pixel location, returns the meter postion
+    // Given pixel location, returns the meter postion
     projection.projectImagePixelToMeterUnit({ x: 69, y: 69 });
 
-    // give meter location, returns the pixel position
+    // Given meter location, returns the pixel position
     projection.projectMeterUnitToImagePixel({ x: METER_LNG_VALUE, y: METER_LAT_VALUE });
 
-    // give meter locatiom, returns the lng lat position
+    // Given meter locatiom, returns the lng lat position
     projection.projectMetersToDegreeUnits({ x: METER_LNG_VALUE, y: METER_LAT_VALUE });
 ```
 

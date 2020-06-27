@@ -27,6 +27,16 @@ export default class RadarImageProjection {
         this.image = null;
     }
 
+    get width(): number {
+        assertNotNull(this.image, 'Image not loaded.');
+        return this.image.width;
+    }
+
+    get height(): number {
+        assertNotNull(this.image, 'Image not loaded.');
+        return this.image.height;
+    }
+
     loadImageFromBuffer(buffer: Buffer): void {
         this.image = PNG.sync.read(buffer, { checkCRC: false });
     }
