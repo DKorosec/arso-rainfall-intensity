@@ -37,8 +37,8 @@ export default class ArsoProjection extends RadarImageProjection {
         const meterProj = 'EPSG:4326';
         // bbox from arso is wrongly aligned or proj is not totally correct
         // causing offset, which is fixed with those manually polished points.
-        const bboxSW: IPoint = { x: 44.657, y: 12.10 };
-        const bboxNE: IPoint = { x: 47.407, y: 17.44 };
+        const bboxSW: IPoint = { x: 12.10, y: 44.657 };
+        const bboxNE: IPoint = { x: 17.44, y: 47.407 };
         super(degreeProj, meterProj, bboxSW, bboxNE);
 
         // arso decided to color the red bbox the same color scheme
