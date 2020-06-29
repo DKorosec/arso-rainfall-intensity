@@ -6,7 +6,7 @@ export type { IPixelRadarResult };
 
 const noReadingPixelResult: IPixelRadarResult = { pixel: [0, 0, 0], value: 0, group: 0 };
 
-export const radarColorsInfo: IPixelRadarResult[] = [
+export const radarRainfallColorsInfo: IPixelRadarResult[] = [
     { pixel: [203, 0, 204], value: 57, group: 4 },
     { pixel: [181, 3, 3], value: 54, group: 4 },
     { pixel: [211, 0, 0], value: 51, group: 4 },
@@ -25,14 +25,19 @@ export const radarColorsInfo: IPixelRadarResult[] = [
     noReadingPixelResult
 ];
 
-const radarColorsInfoMap: Map<string, IPixelRadarResult> = new Map(radarColorsInfo
-    .map((colors) => [`${colors.pixel[0]}-${colors.pixel[1]}-${colors.pixel[2]}`, colors]));
+export const radarHailProbabilityColorsInfo: IPixelRadarResult[] = [
+    { pixel: [250, 0, 0], value: 3, group: 3 },
+    { pixel: [250, 125, 0], value: 2, group: 2 },
+    { pixel: [250, 225, 0], value: 1, group: 1 },
+    noReadingPixelResult
+]
 
-export default class ArsoProjection extends RadarImageProjection {
+class ArsoProjection extends RadarImageProjection {
     public readonly interestPixelBounds: IBBox;
     private _imagePixelRadarMap: (IPixelRadarResult)[][] | null;
+    private _radarColorsInfoMap: Map<string, IPixelRadarResult>;
 
-    constructor() {
+    constructor(radarPixelColorsInfo: IPixelRadarResult[]) {
         const degreeProj = 'EPSG:900913';
         const meterProj = 'EPSG:4326';
         // bbox from arso is wrongly aligned or proj is not totally correct
@@ -53,7 +58,8 @@ export default class ArsoProjection extends RadarImageProjection {
             x1: 25, x2: 774,
             y1: 12, y2: 585
         };
-
+        this._radarColorsInfoMap = new Map(radarPixelColorsInfo
+            .map((colors) => [`${colors.pixel[0]}-${colors.pixel[1]}-${colors.pixel[2]}`, colors]));
         this._imagePixelRadarMap = null;
     }
 
@@ -77,7 +83,7 @@ export default class ArsoProjection extends RadarImageProjection {
         if (a !== 255) {
             return noReadingPixelResult;
         }
-        const colorResult = radarColorsInfoMap.get(`${r}-${g}-${b}`);
+        const colorResult = this._radarColorsInfoMap.get(`${r}-${g}-${b}`);
         if (!colorResult) {
             return noReadingPixelResult;
         }
@@ -110,3 +116,6 @@ export default class ArsoProjection extends RadarImageProjection {
         }
     }
 }
+
+export default class ArsoRainfallProjection extends ArsoProjection { constructor() { super(radarRainfallColorsInfo); } }
+export class ArsoHailProbabilityProjection extends ArsoProjection { constructor() { super(radarHailProbabilityColorsInfo); } }

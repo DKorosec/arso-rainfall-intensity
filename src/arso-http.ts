@@ -36,3 +36,11 @@ export async function fetchLatestRadarSnapshotsTimeline(): Promise<RadarDataSnap
     return response.data.map(item => new RadarDataSnapshot(item));
 }
 
+export async function fetchLatestRadarHailProbabilitySnapshotsTimeline(): Promise<RadarDataSnapshot[]> {
+    const apiUrl = 'http://meteo.arso.gov.si/uploads/probase/www/nowcast/inca/inca_hp_data.json?prod=hp';
+    const response = await axios.get<ILatestRadarSnapshotsTimelineHttpResult[]>(apiUrl, {
+        responseType: 'json'
+    });
+    return response.data.map(item => new RadarDataSnapshot(item));
+}
+
