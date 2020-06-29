@@ -30,7 +30,7 @@ export const radarHailProbabilityColorsInfo: IPixelRadarResult[] = [
     { pixel: [250, 125, 0], value: 2, group: 2 },
     { pixel: [250, 225, 0], value: 1, group: 1 },
     noReadingPixelResult
-]
+];
 
 class ArsoProjection extends RadarImageProjection {
     public readonly interestPixelBounds: IBBox;
