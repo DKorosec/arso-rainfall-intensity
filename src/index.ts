@@ -1,4 +1,4 @@
-import ArsoProjection from './arso-projection';
+import ArsoProjection, { ArsoHailProbabilityProjection } from './arso-projection';
 import * as ArsoHttpApi from './arso-http';
 
-export { ArsoProjection, ArsoHttpApi };
+export { ArsoProjection, ArsoHailProbabilityProjection, ArsoHttpApi };
